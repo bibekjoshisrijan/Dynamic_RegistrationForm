@@ -1,0 +1,7 @@
+.mat-radio-button ~ .mat-radio-button {
+    margin-left: 20px;
+  }
+
+  #mat-lable{
+      margin-right: 2%;
+  }

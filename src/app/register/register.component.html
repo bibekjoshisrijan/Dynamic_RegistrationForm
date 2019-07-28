@@ -1,0 +1,56 @@
+<div class="container ">
+  <div class="row">
+    <form class="col s12" (ngSubmit)="onSubmit()">
+      <div class="row">
+        <div class="input-field col-s12">
+          <mat-form-field>
+            <mat-label>Choose Type</mat-label>
+            <mat-select (selectionChange)="Selected($event)" [(ngModel)]="selected_type"
+              [ngModelOptions]="{standalone: true}">
+              <mat-option *ngFor="let type of application_type" [value]="type.value">
+                {{type.viewValue}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+
+      </div>
+      <div class="row">
+        <div class="input-field col-s12">
+          <mat-radio-group aria-label="Select an option" [(ngModel)]="selected_term"
+            [ngModelOptions]="{standalone: true}">
+            <mat-label id="mat-lable">Choose Term</mat-label>
+            <mat-radio-button value="Annual">Annual</mat-radio-button>
+            <mat-radio-button value="Life term">Life term</mat-radio-button>
+          </mat-radio-group>
+        </div>
+      </div>
+      <div class="row">
+
+        <div class="input-field col-s12">
+          <mat-form-field>
+            <mat-label>Choose Category</mat-label>
+            <mat-select (selectionChange)="Selected($event)" [(ngModel)]="selected_category"
+              [ngModelOptions]="{standalone: true}">
+              <mat-option *ngFor="let category of categories" [value]="category.value">
+                {{category.viewValue}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+
+      </div>
+      <app-beekeeper [term]="selected_term" *ngIf="selected_category==='0' && selected_type==='0';else other"></app-beekeeper>
+
+    <ng-template #other>
+
+        <app-other [term]="selected_term" ></app-other>
+
+    </ng-template>
+    
+
+      
+    </form>
+  </div>
+
+</div>

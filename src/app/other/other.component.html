@@ -1,0 +1,136 @@
+<form [formGroup]="other_individual" (ngSubmit)="onSubmit()" enctype="multipart/form-data">
+    <div class="row">
+        <div class="input-field col s12">
+            <input id="nname" name="name" formControlName="name" type="text" class="validate">
+            <label for="name">Tender/Director/President Name</label>
+
+            <div class="red-text test-darken-2" *ngIf="name.errors && (name.dirty || name.touched)">
+                <p *ngIf="name.errors.required">First Name is required</p>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="row">
+        <div class="input-field col s4">
+            <input type="text" formControlName="address" id="address" class="validate">
+            <label for="address">Address</label>
+            <div class="red-text test-darken-2" *ngIf="address.errors && (address.dirty || address.touched)">
+                <p *ngIf="address.errors.required">Address is required</p>
+            </div>
+        </div>
+        <div class="input-field col s4">
+            <input type="text" formControlName="state" id="state" class="validate">
+            <label for="state">State</label>
+            <div class="red-text test-darken-2" *ngIf="state.errors && (state.dirty || state.touched)">
+                <p *ngIf="state.errors.required">State is required</p>
+            </div>
+        </div>
+        <div class="input-field col s4">
+            <input formControlName="city" type="text" id="city" class="validate">
+            <label for="city">City</label>
+            <div class="red-text test-darken-2" *ngIf="city.errors && (state.dirty || state.touched)">
+                <p *ngIf="city.errors.required">City is required</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="input-field col s12">
+            <input type="text" formControlName="cin_number" id="cin_number" class="validate">
+            <label for="cin_number">Registration/CIN Number</label>
+            <div class="red-text test-darken-2" *ngIf="cin_number.errors && (cin_number.dirty || cin_number.touched)">
+                <p *ngIf="cin_number.errors.required">Address is required</p>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="row">
+        <div class="input-field col s6">
+            <input type="text" id="colony" formControlName="colony" class="validate">
+            <label for="colony">Colony</label>
+            <div class="red-text test-darken-2" *ngIf="colony.errors && (colony.dirty || colony.touched)">
+                <p *ngIf="colony.errors.required">Colony is required</p>
+            </div>
+        </div>
+        <div class="input-field col s6">
+                <input id="quantity" type="text" class="validate" formControlName="quantity">
+                <label for="quantity">Quantity of Honey Produced Last year.</label>
+                <div class="red-text test-darken-2"
+                *ngIf="quantity.errors && (quantity.dirty || quantity.touched)">
+             <p *ngIf="quantity.errors.required">Quantity is required</p>
+            </div>
+            </div>
+    </div>
+
+
+    <div class="row">
+            <div class="input-field col s6">
+              <input type="text" formControlName="amount" readonly>
+              <label for="amount">Amount</label>
+              <div class="red-text test-darken-2"
+              *ngIf="amount.errors && (amount.dirty || amount.touched)">
+           <p *ngIf="amount.errors.required">Amount is required</p>
+          </div>
+            </div>
+            <div class="input-field col s6">
+                <input type="text" formControlName="demand_draft">
+                <label for="dd">Demand Draft Number</label>
+                <div class="red-text test-darken-2"
+                *ngIf="demand_draft.errors && (demand_draft.dirty || demand_draft.touched)">
+             <p *ngIf="demand_draft.errors.required">Demand Draft is required</p>
+            </div>
+              </div>
+          </div>
+
+          <div class="row">
+                <div class="file-field input-field col s6">
+                        <div class="btn  btn-small">
+                          <span>Upload Aadhar</span>
+                          <input id="image" type="file" (change)="onSelectFile($event)">
+                        </div>
+                        <div class="file-path-wrapper">
+                          <input class="file-path validate"   type="text">
+                        </div>
+                      </div>
+
+                      <div class="file-field input-field col s6">
+                            <div class="btn  btn-small">
+                              <span>Passport size photo</span>
+                              <input type="file" (change)="onSelectFile($event)">
+                            </div>
+                            <div class="file-path-wrapper">
+                              <input class="file-path validate"   type="text">
+                            </div>
+                          </div>
+                   
+          </div>
+
+          <div class="row">
+                <div class="file-field input-field col s6">
+                        <div class="btn  btn-small">
+                          <span>Registration Certificate</span>
+                          <input id="image" type="file" (change)="onSelectFile($event)">
+                        </div>
+                        <div class="file-path-wrapper">
+                          <input class="file-path validate"   type="text">
+                        </div>
+                      </div>
+
+                      <div class="file-field input-field col s6">
+                            <div class="btn  btn-small">
+                              <span>CIN Certificate</span>
+                              <input type="file" (change)="onSelectFile($event)">
+                            </div>
+                            <div class="file-path-wrapper">
+                              <input class="file-path validate"   type="text">
+                            </div>
+                          </div>
+                   
+          </div>
+
+    <button class="btn waves-effect waves-light" type="submit" name="action">Submit
+        <i class="material-icons right">send</i>
+    </button>
+</form>
