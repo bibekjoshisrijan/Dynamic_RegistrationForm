@@ -1,4 +1,218 @@
-<form [formGroup]="beekeeper" (ngSubmit)="onSubmit()" enctype="multipart/form-data" >
+<form [formGroup]="beekeeper" (ngSubmit)="onSubmit()">
+    <div formGroupName="name">
+        <div class="form-group">
+            <label for="first_name">First Name</label>
+            <input class="form-control" id="first_name" name="first_name" formControlName="first_name" type="text">
+            <!-- <input type="text" class="form-control" id="firstName" /> -->
+            <div class="invalid" *ngIf="first_name.errors && (first_name.dirty || first_name.touched)">
+                <p *ngIf="first_name.errors.required">First Name is required</p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="last_name">Last Name</label>
+            <input id="last_name" name="last_name" formControlName="last_name" type="text" class="form-control">
+            <div class="red-text test-darken-2" *ngIf="last_name.errors && (last_name.dirty || last_name.touched)">
+                <p *ngIf="last_name.errors.required">Last Name is required</p>
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <input type="text" formControlName="address" id="address" class="form-control">
+        <label for="address">Address</label>
+        <div class="red-text test-darken-2" *ngIf="address.errors && (address.dirty || address.touched)">
+            <p *ngIf="address.errors.required">Address is required</p>
+        </div>
+    </div>
+    <div class="form-group">
+        <input type="text" formControlName="state" id="state" class="form-control">
+        <label for="state">State</label>
+        <div class="red-text test-darken-2" *ngIf="state.errors && (state.dirty || state.touched)">
+            <p *ngIf="state.errors.required">State is required</p>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <input formControlName="city" type="text" id="city" class="form-control">
+        <label for="city">City</label>
+        <div class="red-text test-darken-2" *ngIf="city.errors && (state.dirty || state.touched)">
+            <p *ngIf="city.errors.required">City is required</p>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <input type="text" id="colony" formControlName="colony" class="form-control">
+        <label for="colony">Colony</label>
+        <div class="red-text test-darken-2" *ngIf="colony.errors && (colony.dirty || colony.touched)">
+            <p *ngIf="colony.errors.required">Colony is required</p>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <mat-radio-group aria-label="Select an option" [(ngModel)]="migrate" [ngModelOptions]="{standalone: true}">
+            <mat-label id="mat-lable">Do you Migrate ?</mat-label>
+            <mat-radio-button value="1">Yes</mat-radio-button>
+            <mat-radio-button value="0">No</mat-radio-button>
+        </mat-radio-group>
+    </div>
+
+
+
+    <div class="form-group" *ngIf="migrate==='1' ">
+        <table style=" border-collapse: separate;border-spacing: 1em;">
+            <thead>
+
+                <tr>
+                    <td style="text-align: center">State</td>
+                    <td style="text-align: center">Crop</td>
+                </tr>
+            </thead>
+
+            <tbody>
+                <tr *ngFor="let field of fields;let i=index;let first = first;">
+                    <td>
+                        <!-- <div class="input-field col s4"> -->
+                        <input type="text" id="state" placeholder="Enter City" class="form-control" name="state"
+                            [ngModelOptions]="{standalone: true}" [(ngModel)]="field['state']">
+                        <!-- </div> -->
+                    </td>
+
+                    <td>
+                        <!-- <div class="input-field col s4"> -->
+                        <input type="text" id="crop" placeholder="Enter Crop" class="form-control" name="crop"
+                            [ngModelOptions]="{standalone: true}" [(ngModel)]="field['crop']">
+                        <!-- </div> -->
+                    </td>
+
+                    <td>
+
+                        <!-- <a class="btn-floating btn-large waves-effect waves-light red  btn-small"
+                            (click)="removeFields()">
+                            <i class="material-icons">remove</i>
+                        </a> -->
+
+                        <span *ngIf="!first" class="icon-input-btn">
+                            <span class="glyphicon glyphicon-search">
+                            </span>
+                            <input type="submit" class="btn btn-danger btn-sm" value="Remove Fields"
+                                (click)="removeFields()">
+                        </span>
+                    </td>
+                </tr>
+
+            </tbody>
+            <!-- <div style="padding: 2rem 0;">
+            <a class="btn btn-primary" (click)="addFields()">
+                <i class="material-icons">add</i>
+            </a>
+        </div> -->
+            <span class="icon-input-btn">
+                <span class="glyphicon glyphicon-search">
+                </span>
+                <input type="submit" class="btn btn-primary btn-sm" value="Add Fields" (click)="addFields()">
+            </span>
+
+        </table>
+
+    </div>
+
+    <div class="form-group">
+        <input id="aadhar" type="text" class="form-control" formControlName="aadhar_number">
+        <label for="aadhar">Aadhar Number</label>
+        <div class="red-text test-darken-2"
+            *ngIf="aadhar_number.errors && (aadhar_number.dirty || aadhar_number.touched)">
+            <p *ngIf="aadhar_number.errors.required">Aadhar is required</p>
+            <p *ngIf=" aadhar_number.errors.minlength">Enter 16 Digit Aadhar Number</p>
+            <p *ngIf="aadhar_number.errors.pattern">Please Enter Digit Only</p>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <input id="quantity" type="text" class="form-control" formControlName="quantity">
+        <label for="quantity">Quantity of Honey Produced Last year.</label>
+        <div class="red-text test-darken-2" *ngIf="quantity.errors && (quantity.dirty || quantity.touched)">
+            <p *ngIf="quantity.errors.required">Quantity is required</p>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <input type="text" formControlName="amount" class="form-control" readonly>
+        <label for="amount">Amount</label>
+        <div class="red-text test-darken-2" *ngIf="amount.errors && (amount.dirty || amount.touched)">
+            <p *ngIf="amount.errors.required">Amount is required</p>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <input type="text" class="form-control" formControlName="demand_draft">
+        <label for="dd">Demand Draft Number</label>
+        <div class="red-text test-darken-2" *ngIf="demand_draft.errors && (demand_draft.dirty || demand_draft.touched)">
+            <p *ngIf="demand_draft.errors.required">Demand Draft is required</p>
+        </div>
+    </div>
+    <!-- 
+    <div class="custom-file">
+        <input type="file" class="custom-file-input" id="customFile">
+        <label class="custom-file-label" for="customFile">Upload Aadhar</label>
+    </div> -->
+
+
+    <div class="form-group">
+        <label>Aadhar</label>
+        <div class="custom-file reg-upload">
+            <input type="file" class="custom-file-input" id="customFile" (change)="aadharUpload($event)" />
+            <label id="aadhar_upload" class="custom-file-label" for="customFile">Upload Aadhar</label>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label>Passport Size Photo</label>
+        <div class="custom-file reg-upload">
+            <input type="file" class="custom-file-input" id="customFile" (change)="photoUpload($event)" />
+            <label id="photo_upload" class="custom-file-label" for="customFile">Upload Photo</label>
+
+        </div>
+    </div>
+
+
+
+    <div style="padding: 2rem 0;">
+        <button type="submit" name="action" data-toggle="modal" data-target="#myModal" [disabled]="beekeeper.invalid"
+            class="btn btn-primary">
+            Submit
+        </button>
+
+        <!-- The Modal -->
+        <div class="modal fade" id="myModal">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <!-- Modal Header -->
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">
+                            &times;
+                        </button>
+                    </div>
+
+                    <!-- Modal body -->
+                    <div class="modal-body" style="text-align: center">
+                        <i class="fa fa-check-circle" style="color: green; font-size: 5rem; text-align: center"
+                            aria-hidden="true"></i>
+                        <div>Successfully Registered</div>
+                        <div>Your Unique ID is {{uuid}}.</div>
+                    </div>
+
+                    <!-- Modal footer -->
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="to_home()">
+                            Close
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+<!-- <form [formGroup]="beekeeper" (ngSubmit)="onSubmit()" enctype="multipart/form-data" >
 <div class="row">
     <div formGroupName="name">
             <div class="input-field col s6">
@@ -191,4 +405,4 @@
           </button>
     
 </div>
-</form>
+</form> -->

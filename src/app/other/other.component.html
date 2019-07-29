@@ -1,33 +1,32 @@
 <form [formGroup]="other_individual" (ngSubmit)="onSubmit()">
-    <div class="row">
-        <div class="input-field col s4">
-            <input id="nname" name="name" formControlName="name" type="text" class="validate">
-            <label for="name">Tender/Director/President Name</label>
+    <div class="form-group">
+        <input id="nname" name="name" formControlName="name" type="text" class="form-control">
+        <label for="name">Tender/Director/President Name</label>
 
-            <div class="red-text test-darken-2" *ngIf="name.errors && (name.dirty || name.touched)">
-                <p *ngIf="name.errors.required">First Name is required</p>
-            </div>
+        <div class="red-text test-darken-2" *ngIf="name.errors && (name.dirty || name.touched)">
+            <p *ngIf="name.errors.required">First Name is required</p>
         </div>
+
     </div>
 
 
-    <div class="row">
-        <div class="input-field col s4">
-            <input type="text" formControlName="address" id="address" class="validate">
+    <div class="form-group">
+        <div class="form-group">
+            <input type="text" formControlName="address" id="address" class="form-control">
             <label for="address">Address</label>
             <div class="red-text test-darken-2" *ngIf="address.errors && (address.dirty || address.touched)">
                 <p *ngIf="address.errors.required">Address is required</p>
             </div>
         </div>
-        <div class="input-field col s4">
-            <input type="text" formControlName="state" id="state" class="validate">
+        <div class="form-group">
+            <input type="text" formControlName="state" id="state" class="form-control">
             <label for="state">State</label>
             <div class="red-text test-darken-2" *ngIf="state.errors && (state.dirty || state.touched)">
                 <p *ngIf="state.errors.required">State is required</p>
             </div>
         </div>
-        <div class="input-field col s4">
-            <input formControlName="city" type="text" id="city" class="validate">
+        <div class="form-group">
+            <input formControlName="city" type="text" id="city" class="form-control">
             <label for="city">City</label>
             <div class="red-text test-darken-2" *ngIf="city.errors && (state.dirty || state.touched)">
                 <p *ngIf="city.errors.required">City is required</p>
@@ -35,78 +34,87 @@
         </div>
     </div>
 
-    <div class="row">
-        <div class="input-field col s4">
-            <input type="text" formControlName="cin_number" id="cin_number" class="validate">
+    <div class="form-group">
+        <div class="form-group">
+            <input type="text" formControlName="cin_number" id="cin_number" class="form-control">
             <label for="cin_number">Registration/CIN Number</label>
             <div class="red-text test-darken-2" *ngIf="cin_number.errors && (cin_number.dirty || cin_number.touched)">
                 <p *ngIf="cin_number.errors.required">Address is required</p>
             </div>
         </div>
-            <div class="input-field col s4">
-                <input type="text" id="colony" formControlName="colony" class="validate">
-                <label for="colony">Colony</label>
-                <div class="red-text test-darken-2" *ngIf="colony.errors && (colony.dirty || colony.touched)">
-                    <p *ngIf="colony.errors.required">Colony is required</p>
-                </div>
+        <div class="form-group">
+            <input type="text" id="colony" formControlName="colony" class="form-control">
+            <label for="colony">Colony</label>
+            <div class="red-text test-darken-2" *ngIf="colony.errors && (colony.dirty || colony.touched)">
+                <p *ngIf="colony.errors.required">Colony is required</p>
+            </div>
         </div>
 
-        <div class="input-field col s4">
-            <input id="quantity" type="text" class="validate" formControlName="quantity">
+        <div class="form-group">
+            <input id="quantity" type="text" class="form-control" formControlName="quantity">
             <label for="quantity">Quantity of Honey Produced Last year.</label>
-            <div class="red-text test-darken-2"
-            *ngIf="quantity.errors && (quantity.dirty || quantity.touched)">
-         <p *ngIf="quantity.errors.required">Quantity is required</p>
-        </div>
+            <div class="red-text test-darken-2" *ngIf="quantity.errors && (quantity.dirty || quantity.touched)">
+                <p *ngIf="quantity.errors.required">Quantity is required</p>
+            </div>
         </div>
     </div>
 
-    <div class="row">
-            <div class="input-field col s6">
-              <input type="text" formControlName="amount" readonly>
-              <label for="amount">Amount</label>
-              <div class="red-text test-darken-2"
-              *ngIf="amount.errors && (amount.dirty || amount.touched)">
-           <p *ngIf="amount.errors.required">Amount is required</p>
-          </div>
+    <div class="form-group">
+        <div class="form-group">
+            <input type="text" class="form-control" formControlName="amount" readonly>
+            <label for="amount">Amount</label>
+            <div class="red-text test-darken-2" *ngIf="amount.errors && (amount.dirty || amount.touched)">
+                <p *ngIf="amount.errors.required">Amount is required</p>
             </div>
-            <div class="input-field col s6">
-                <input type="text" formControlName="demand_draft">
-                <label for="dd">Demand Draft Number</label>
-                <div class="red-text test-darken-2"
+        </div>
+        <div class="form-group">
+            <input type="text" class="form-control" formControlName="demand_draft">
+            <label for="dd">Demand Draft Number</label>
+            <div class="red-text test-darken-2"
                 *ngIf="demand_draft.errors && (demand_draft.dirty || demand_draft.touched)">
-             <p *ngIf="demand_draft.errors.required">Demand Draft is required</p>
+                <p *ngIf="demand_draft.errors.required">Demand Draft is required</p>
             </div>
-              </div>
-          </div>
+        </div>
+    </div>
 
-          <div class="row">
-              <div class="file-field input-field col s6">
-                  <div class="btn btn-small">
-                    <span>Upload Aadhar</span>
-                    <input type="file" >
-                  </div>
-                  <div class="file-path-wrapper">
-                    <input class="file-path validate" (change)="onSelectFile($event)" type="text" placeholder="Upload Aadhar">
-                  </div>
-                </div>
+    <div class="form-group">
+        <div class="form-group">
+            <label>Aadhar</label>
+            <div class="custom-file reg-upload">
+                <input type="file" class="custom-file-input" id="customFile" (change)="aadharUpload($event)" />
+                <label id="aadhar_upload" class="custom-file-label" for="customFile">Upload Aadhar</label>
+            </div>
+        </div>
+        <div class="form-group">
+            <label>Passport size photo</label>
+            <div class="custom-file reg-upload">
+                <input type="file" class="custom-file-input" id="customFile" (change)="photoUpload($event)" />
+                <label id="photo_upload" class="custom-file-label" for="customFile">Choose Passport size photo</label>
+            </div>
+        </div>
 
-                      <div class="file-field input-field col s6">
-                            <div class="btn  btn-small">
-                              <span>Passport size photo</span>
-                              <input type="file" (change)="onSelectFile($event)"
-                            
-                              >
-                            </div>
-                            <div class="file-path-wrapper">
-                              <input class="file-path validate"   placeholder="Choose Passport size photo"   type="text">
-                            </div>
-                          </div>
-                   
-          </div>
 
-          <div class="row">
-                <div class="file-field input-field col s6">
+
+    </div>
+
+    <div class="form-group">
+        <div class="form-group">
+            <label>Registration Certificate</label>
+            <div class="custom-file reg-upload">
+                <input type="file" class="custom-file-input" id="customFile" (change)="certUpload($event)" />
+                <label id="cert_upload" class="custom-file-label" for="customFile">Upload Registration
+                    Certificate</label>
+            </div>
+        </div>
+        <div class="form-group">
+            <label>CIN Certificate</label>
+            <div class="custom-file reg-upload">
+                <input type="file" class="custom-file-input" id="customFile" (change)="cinUpload($event)" />
+                <label id="cin_upload" class="custom-file-label" for="customFile">Upload CIN Certificate</label>
+            </div>
+        </div>
+    </div>
+    <!-- <div class="file-field input-field col s6">
                         <div class="btn  btn-small">
                           <span>Registration Certificate</span>
                           <input id="image" type="file"
@@ -116,9 +124,9 @@
                         <div class="file-path-wrapper">
                           <input class="file-path validate"  placeholder="Upload Certificate"  type="text">
                         </div>
-                      </div>
+                      </div> -->
 
-                      <div class="file-field input-field col s6">
+    <!-- <div class="file-field input-field col s6">
                             <div class="btn  btn-small">
                               <span>CIN Certificate</span>
                               <input type="file" 
@@ -128,13 +136,48 @@
                             <div class="file-path-wrapper">
                               <input class="file-path validate"  placeholder=" Upload CIN Certificate"   type="text">
                             </div>
-                          </div>
-                   
-          </div>
+                          </div> -->
 
-    <button class="btn waves-effect waves-light" 
+    <!-- <button class="btn waves-effect waves-light" 
     [disabled] = "other_individual.invalid"
     type="submit" name="action">Submit
         <i class="material-icons right">send</i>
-    </button>
+    </button> -->
+
+    <div style="padding: 2rem 0;">
+        <button type="submit" name="action" [disabled]="other_individual.invalid" data-toggle="modal"
+            data-target="#myModal" class="btn btn-primary">
+            Submit
+        </button>
+    </div>
+
+
+    <!-- The Modal -->
+    <div class="modal fade" id="myModal">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <!-- Modal Header -->
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">
+                            &times;
+                        </button>
+                    </div>
+
+                    <!-- Modal body -->
+                    <div class="modal-body" style="text-align: center">
+                        <i class="fa fa-check-circle" style="color: green; font-size: 5rem; text-align: center"
+                            aria-hidden="true"></i>
+                        <div>Successfully Registered</div>
+                        <div>Your Unique ID is {{uuid}}.</div>
+                    </div>
+
+                    <!-- Modal footer -->
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="to_home()">
+                            Close
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
 </form>

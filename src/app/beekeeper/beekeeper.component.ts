@@ -2,16 +2,25 @@ import { Component, OnInit , Input, Output, EventEmitter} from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormControl, Form } from '@angular/forms';
 import { StorageService } from '../services/storage.service';
 import{Router} from '@angular/router'
+
+interface HTMLInputEvent extends Event {
+  target: HTMLInputElement & EventTarget;
+}
+
 @Component({
   selector: 'app-beekeeper',
   templateUrl: './beekeeper.component.html',
   styleUrls: ['./beekeeper.component.css']
 })
 export class BeekeeperComponent implements OnInit {
-  formData = new FormData();
-  beekeeper:FormGroup
-  migrate : Boolean ;
   fields =  [{state: '',crop:''}]
+  formData = new FormData();
+  aadhar_url;
+  pp_url;
+  migrate : Boolean 
+  
+  beekeeper:FormGroup
+  
   first_name:FormControl;
   last_name:FormControl
   address:FormControl;
@@ -23,10 +32,12 @@ export class BeekeeperComponent implements OnInit {
   colony:FormControl
   amount:FormControl
   demand_draft:FormControl
+  
   @Input('term') term :String
   @Input('category') category :String
   @Input('type') type :String
   @Output('submitted') submitted = new EventEmitter<boolean>()
+  uuid
   constructor(private formBuilder:FormBuilder,
               private storage:StorageService,
               private route:Router) { }
@@ -83,10 +94,10 @@ removeFields(){
 
 create_UUID(){
   var dt = new Date().getTime();
-  var uuid = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
-      var r = (dt + Math.random()*16)%16 | 0;
-      dt = Math.floor(dt/16);
-      return (c=='x' ? r :(r&0x3|0x8)).toString(16);
+  var uuid = 'xx-xxx'.replace(/[xy]/g, function(c) {
+      var r = (dt + Math.random()*5)%5 | 0;
+      dt = Math.floor(dt/5);
+      return (c=='x' ? r :(r&0x3|0x8)).toString(5);
   });
   return uuid;
 }
@@ -107,28 +118,64 @@ onSubmit(){
 
   else{
    let submit = this.beekeeper.value
-    let uuid=   this.create_UUID()
+   this.uuid=   this.create_UUID()
     submit['migrate'] = this.migrate
     submit['state_crop'] = this.fields
     submit['type'] = this.type
     submit['category']=this.category
     submit['term'] = this.term
     submit['date'] = date
-    submit['uuid'] = uuid
+    submit['uuid'] = this.uuid
+    submit['aadhar'] = this.aadhar_url
+    submit['pp'] = this.pp_url
    
     submit = JSON.stringify(submit)
 
-    this.storage.setItem(uuid,submit)
+    this.storage.setItem(this.uuid,submit)
     this.submitted.emit(true)
     // this.route.navigate(['admin'])
 
-    // console.log(this.fields)
+    console.log(submit)
 
   }
 }
+aadharUpload(fileInput:HTMLInputEvent){
+  
+    let aadhar = fileInput.target.files[0];
+    console.log(fileInput.target.files)
+    var reader = new FileReader();
+    reader.readAsDataURL(fileInput.target.files[0]);
+    
+    //  To show the input image
 
-onSelectFile(event){
-  console.log(event.value)
+
+    reader.onload = (event) => {
+      // Url for the input image
+    this.aadhar_url= reader.result
+    // console.log(this.url)
+  }
+  document.getElementById("aadhar_upload").innerText = aadhar.name;
+}
+
+photoUpload(fileInput:HTMLInputEvent){
+let photo = fileInput.target.files[0];
+var reader = new FileReader();
+reader.readAsDataURL(fileInput.target.files[0]);
+
+//  To show the input image
+
+
+reader.onload = (event) => {
+  // Url for the input image
+this.pp_url= reader.result
+// console.log(this.url)
+}
+document.getElementById("photo_upload").innerText = photo.name;
+}
+
+to_home(){
+  this.route.navigate(['/'])
+
 }
 
 

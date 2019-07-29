@@ -36,20 +36,16 @@
                 {{categories[data['category']]}}
               </mat-panel-title>
 
-              <mat-panel-description>
-                    Type your name and age
-                  </mat-panel-description>
 
-              <!-- <mat-panel-title>
+            <!-- <mat-panel-title>
+              
+                <p style="margin: 0" class="btn btn-primary">Accept</p>
 
-                <button class="btn  blue waves-effect waves-light  btn-small" type="submit" name="action">Accept
-                <i class="material-icons right">send</i> -->
-                <!-- </button> -->
-              <!-- </mat-panel-title> --> 
+
+              </mat-panel-title> 
               <mat-panel-title (click)="removePanel(i)">
-              Reject
-
-              </mat-panel-title>
+                  <p style="margin: 0" class="btn btn-danger">Reject</p>
+              </mat-panel-title> -->
 
             </mat-expansion-panel-header>
 
@@ -65,18 +61,15 @@
                   {{categories[data['category']]}}
                 </mat-panel-title>
 
-                <mat-panel-title  (click)="Accepted(i)">
-                    <p style="margin: 0" class="btn blue">Accept</p>
+                <!-- <mat-panel-title  (click)="Accepted(i)">
+                    <p style="margin: 0" class="btn btn-primary">Accept</p>
                 </mat-panel-title>
 
                 <mat-panel-title  (click)="removePanel(i)">
-                    <p style="margin: 0" class="btn red">Reject</p>
-                </mat-panel-title>
+                    <p style="margin: 0" class="btn btn-danger">Reject</p>
+                </mat-panel-title> -->
       
 
-                <!-- <mat-panel-description>
-                    Type your name and age
-                  </mat-panel-description> -->
               </mat-expansion-panel-header>
             </ng-template>
 
@@ -88,17 +81,24 @@
 
 
             <div class="row">
-              <div class="col s6">
-                <button class="btn  blue waves-effect waves-light  btn-small" type="submit" name="action">Accept
-                  <!-- <i class="material-icons right">send</i> -->
+              <div class="col-sm-4 offset-md-10">
+                <button class="btn  btn-primary" type="submit" name="action">Accept
                 </button>
 
-                <button class="btn  red waves-effect waves-light  btn-small" style="margin-left: 2%;"
+                <button
+                 class="btn  btn-danger" style="margin-left: 2%;"
                   (click)="removePanel(i)" type="submit" name="action">Reject
-                  <!-- <i class="material-icons right">send</i> -->
                 </button>
               </div>
             </div>
+            <!-- <div class="row">
+
+  
+                <button class="btn-primary" >Accept</button>
+                <button  class="btn-danger" (click)="removePanel(i)" >Reject</button>
+    
+            </div> -->
+            
 
           </mat-expansion-panel>
           <!-- <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">

@@ -8,9 +8,10 @@ export class StorageService {
   submitted_data = []
   constructor() { }
 
-  setItem(uuid, submit) {
-    localStorage.setItem(uuid, submit)
-    this.uuid.push(uuid)
+  setItem(id, submit) {
+    localStorage.setItem(id, submit)
+    
+    this.uuid.push(id)
     localStorage.setItem('uuids', JSON.stringify(this.uuid))
   }
 
@@ -22,6 +23,10 @@ export class StorageService {
     }
     console.log(this.submitted_data)
     return this.submitted_data
+  }
+
+  getid(){
+    // return localStorage.getItem('')
   }
 
   removeData(i){
