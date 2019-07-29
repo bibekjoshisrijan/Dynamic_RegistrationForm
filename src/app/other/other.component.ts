@@ -1,5 +1,7 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormControl, Form } from '@angular/forms';
+import { StorageService } from '../services/storage.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-other',
@@ -20,8 +22,12 @@ export class OtherComponent implements OnInit {
   other_individual:FormGroup;
   
   @Input('term') term :String
+  @Input('category') category :String
+  @Input('type') type :String
+  @Output('submitted') othersubmitted = new EventEmitter<boolean>()
 
-  constructor() { }
+  constructor(private storage:StorageService,
+    private route:Router) { }
 
   ngOnInit() {
     this.state = new FormControl('u.p',Validators.required) 
@@ -79,17 +85,21 @@ onSubmit(){
    let submit = this.other_individual.value
    let uuid=   this.create_UUID()
 
-    submit['type'] = '0'
-    submit['category']='0'
+    submit['type'] = this.type
+    submit['category']=this.category
     submit['term'] = this.term
     submit['date'] = date
     submit = JSON.stringify(submit)
-    localStorage.setItem(uuid,submit)
-    console.log(submit)
+    this.storage.setItem(uuid,submit)
+    // console.log(submit)
+    this.othersubmitted.emit(true)
+
     // console.log(this.fields)
 
   }
 }
-
+onSelectFile(event){
+  console.log(event.value)
+}
  
 }

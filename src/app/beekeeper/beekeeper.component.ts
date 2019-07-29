@@ -1,6 +1,7 @@
-import { Component, OnInit , Input} from '@angular/core';
+import { Component, OnInit , Input, Output, EventEmitter} from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormControl, Form } from '@angular/forms';
-
+import { StorageService } from '../services/storage.service';
+import{Router} from '@angular/router'
 @Component({
   selector: 'app-beekeeper',
   templateUrl: './beekeeper.component.html',
@@ -10,7 +11,7 @@ export class BeekeeperComponent implements OnInit {
   formData = new FormData();
   beekeeper:FormGroup
   migrate : Boolean ;
-  fields =  [{state: 'Enter State1',crop:'Enter Crop1'}]
+  fields =  [{state: '',crop:''}]
   first_name:FormControl;
   last_name:FormControl
   address:FormControl;
@@ -23,9 +24,12 @@ export class BeekeeperComponent implements OnInit {
   amount:FormControl
   demand_draft:FormControl
   @Input('term') term :String
-
- 
-  constructor(private formBuilder:FormBuilder) { }
+  @Input('category') category :String
+  @Input('type') type :String
+  @Output('submitted') submitted = new EventEmitter<boolean>()
+  constructor(private formBuilder:FormBuilder,
+              private storage:StorageService,
+              private route:Router) { }
 
   ngOnInit()
    {
@@ -42,9 +46,10 @@ export class BeekeeperComponent implements OnInit {
     this.demand_draft = new FormControl('123124134',[Validators.required,Validators.pattern("^[0-9]*$")])
     this.amount =  new FormControl('1000',[Validators.required,Validators.pattern("^[0-9]*$")])
     this.beekeeper = new FormGroup({
-
-      first_name:this.first_name,
-      last_name:this.last_name,
+      name : new FormGroup({
+        first_name:this.first_name,
+        last_name:this.last_name,
+      }),
       address:this.address,
       city:this.city,
       state:this.state,
@@ -65,7 +70,7 @@ console.log(this.migrate)
 }
 
 addFields(){
-  this.fields.push({state: 'Enter State',crop:'Enter Crop'})
+  this.fields.push({state: '',crop:''})
   
 }
 
@@ -105,13 +110,18 @@ onSubmit(){
     let uuid=   this.create_UUID()
     submit['migrate'] = this.migrate
     submit['state_crop'] = this.fields
-    submit['type'] = '0'
-    submit['category']='0'
+    submit['type'] = this.type
+    submit['category']=this.category
     submit['term'] = this.term
     submit['date'] = date
     submit['uuid'] = uuid
-    console.log(submit)
-    console.log(this.migrate)
+   
+    submit = JSON.stringify(submit)
+
+    this.storage.setItem(uuid,submit)
+    this.submitted.emit(true)
+    // this.route.navigate(['admin'])
+
     // console.log(this.fields)
 
   }

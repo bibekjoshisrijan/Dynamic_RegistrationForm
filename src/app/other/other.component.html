@@ -1,6 +1,6 @@
-<form [formGroup]="other_individual" (ngSubmit)="onSubmit()" enctype="multipart/form-data">
+<form [formGroup]="other_individual" (ngSubmit)="onSubmit()">
     <div class="row">
-        <div class="input-field col s12">
+        <div class="input-field col s4">
             <input id="nname" name="name" formControlName="name" type="text" class="validate">
             <label for="name">Tender/Director/President Name</label>
 
@@ -36,34 +36,30 @@
     </div>
 
     <div class="row">
-        <div class="input-field col s12">
+        <div class="input-field col s4">
             <input type="text" formControlName="cin_number" id="cin_number" class="validate">
             <label for="cin_number">Registration/CIN Number</label>
             <div class="red-text test-darken-2" *ngIf="cin_number.errors && (cin_number.dirty || cin_number.touched)">
                 <p *ngIf="cin_number.errors.required">Address is required</p>
             </div>
         </div>
-    </div>
-
-
-    <div class="row">
-        <div class="input-field col s6">
-            <input type="text" id="colony" formControlName="colony" class="validate">
-            <label for="colony">Colony</label>
-            <div class="red-text test-darken-2" *ngIf="colony.errors && (colony.dirty || colony.touched)">
-                <p *ngIf="colony.errors.required">Colony is required</p>
-            </div>
+            <div class="input-field col s4">
+                <input type="text" id="colony" formControlName="colony" class="validate">
+                <label for="colony">Colony</label>
+                <div class="red-text test-darken-2" *ngIf="colony.errors && (colony.dirty || colony.touched)">
+                    <p *ngIf="colony.errors.required">Colony is required</p>
+                </div>
         </div>
-        <div class="input-field col s6">
-                <input id="quantity" type="text" class="validate" formControlName="quantity">
-                <label for="quantity">Quantity of Honey Produced Last year.</label>
-                <div class="red-text test-darken-2"
-                *ngIf="quantity.errors && (quantity.dirty || quantity.touched)">
-             <p *ngIf="quantity.errors.required">Quantity is required</p>
-            </div>
-            </div>
-    </div>
 
+        <div class="input-field col s4">
+            <input id="quantity" type="text" class="validate" formControlName="quantity">
+            <label for="quantity">Quantity of Honey Produced Last year.</label>
+            <div class="red-text test-darken-2"
+            *ngIf="quantity.errors && (quantity.dirty || quantity.touched)">
+         <p *ngIf="quantity.errors.required">Quantity is required</p>
+        </div>
+        </div>
+    </div>
 
     <div class="row">
             <div class="input-field col s6">
@@ -85,23 +81,25 @@
           </div>
 
           <div class="row">
-                <div class="file-field input-field col s6">
-                        <div class="btn  btn-small">
-                          <span>Upload Aadhar</span>
-                          <input id="image" type="file" (change)="onSelectFile($event)">
-                        </div>
-                        <div class="file-path-wrapper">
-                          <input class="file-path validate"   type="text">
-                        </div>
-                      </div>
+              <div class="file-field input-field col s6">
+                  <div class="btn btn-small">
+                    <span>Upload Aadhar</span>
+                    <input type="file" >
+                  </div>
+                  <div class="file-path-wrapper">
+                    <input class="file-path validate" (change)="onSelectFile($event)" type="text" placeholder="Upload Aadhar">
+                  </div>
+                </div>
 
                       <div class="file-field input-field col s6">
                             <div class="btn  btn-small">
                               <span>Passport size photo</span>
-                              <input type="file" (change)="onSelectFile($event)">
+                              <input type="file" (change)="onSelectFile($event)"
+                            
+                              >
                             </div>
                             <div class="file-path-wrapper">
-                              <input class="file-path validate"   type="text">
+                              <input class="file-path validate"   placeholder="Choose Passport size photo"   type="text">
                             </div>
                           </div>
                    
@@ -111,26 +109,32 @@
                 <div class="file-field input-field col s6">
                         <div class="btn  btn-small">
                           <span>Registration Certificate</span>
-                          <input id="image" type="file" (change)="onSelectFile($event)">
+                          <input id="image" type="file"
+                         
+                          (change)="onSelectFile($event)">
                         </div>
                         <div class="file-path-wrapper">
-                          <input class="file-path validate"   type="text">
+                          <input class="file-path validate"  placeholder="Upload Certificate"  type="text">
                         </div>
                       </div>
 
                       <div class="file-field input-field col s6">
                             <div class="btn  btn-small">
                               <span>CIN Certificate</span>
-                              <input type="file" (change)="onSelectFile($event)">
+                              <input type="file" 
+                             
+                              (change)="onSelectFile($event)">
                             </div>
                             <div class="file-path-wrapper">
-                              <input class="file-path validate"   type="text">
+                              <input class="file-path validate"  placeholder=" Upload CIN Certificate"   type="text">
                             </div>
                           </div>
                    
           </div>
 
-    <button class="btn waves-effect waves-light" type="submit" name="action">Submit
+    <button class="btn waves-effect waves-light" 
+    [disabled] = "other_individual.invalid"
+    type="submit" name="action">Submit
         <i class="material-icons right">send</i>
     </button>
 </form>

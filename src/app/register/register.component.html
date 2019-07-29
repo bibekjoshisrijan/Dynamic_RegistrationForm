@@ -1,8 +1,12 @@
 <div class="container ">
-  <div class="row">
-    <form class="col s12" (ngSubmit)="onSubmit()">
+  <div class="row" >
+    <div class="row green" *ngIf="formSubmit || IndividualSubmit">
+      <p>Beekeeper Form is Submitted</p>
+    </div>
+    
+    <form class="col s10" (ngSubmit)="onSubmit()" style="border: 2px solid black">
       <div class="row">
-        <div class="input-field col-s12">
+        <div class="input-field col-s4">
           <mat-form-field>
             <mat-label>Choose Type</mat-label>
             <mat-select (selectionChange)="Selected($event)" [(ngModel)]="selected_type"
@@ -16,7 +20,7 @@
 
       </div>
       <div class="row">
-        <div class="input-field col-s12">
+        <div class="input-field col-s4">
           <mat-radio-group aria-label="Select an option" [(ngModel)]="selected_term"
             [ngModelOptions]="{standalone: true}">
             <mat-label id="mat-lable">Choose Term</mat-label>
@@ -27,7 +31,7 @@
       </div>
       <div class="row">
 
-        <div class="input-field col-s12">
+        <div class="input-field col-s4">
           <mat-form-field>
             <mat-label>Choose Category</mat-label>
             <mat-select (selectionChange)="Selected($event)" [(ngModel)]="selected_category"
@@ -40,13 +44,15 @@
         </div>
 
       </div>
-      <app-beekeeper [term]="selected_term" *ngIf="selected_category==='0' && selected_type==='0';else other"></app-beekeeper>
+      <app-beekeeper (submitted)="formSubmitted($event)"[term]="selected_term" [category]="selected_category"
+      [type]="selected_type" *ngIf="selected_category==='0'"></app-beekeeper>
 
-    <ng-template #other>
+   
 
-        <app-other [term]="selected_term" ></app-other>
+        <app-other  (othersubmitted)="otherSubmit($event)" [term]="selected_term"  *ngIf="(selected_category !== '0') && (selected_category !== undefined)" [category]="selected_category"
+        [type]="selected_type" ></app-other>
 
-    </ng-template>
+    
     
 
       

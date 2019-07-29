@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import {debounceTime,distinctUntilChanged, debounce} from 'rxjs/operators'
-import { BehaviorSubject } from 'rxjs';
+import { StaticService } from '../services/static.service';
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
@@ -13,30 +13,22 @@ submitted: Boolean = false;
 type:FormControl
 term:FormControl
 category:FormControl
-
+formSubmit;
 selected_type 
 selected_category
 selected_term
+IndividualSubmit
 
-  constructor(    private formBuilder: FormBuilder,
-    ) { }
+  constructor(private formBuilder: FormBuilder,private staticData:StaticService) 
+  { }
 
-    application_type = [
-      {value: '0', viewValue: 'New Application'},
-      {value: '1', viewValue: 'Renew Application'},
-    ];
+    application_type =this.staticData.applicationType()
 
-    categories = [
-      {value:'0' , viewValue:'Individual Beekeeper'},
-      {value:'1' , viewValue:'BeeKeeping and Honey Society/KVIC/SKVIC'},
-      {value:'2' , viewValue:'Company/Firm'},
-      {value:'3' , viewValue:'SHG,Self Help Group'},
-      {value:'4' , viewValue:'SFAC Nominated'}
-
-    ]
+    categories = this.staticData.category()
   ngOnInit() {
    
- 
+//  console.log(this.staticData.application_type)
+//  console.log( this.staticData.categories)
       // console.log(this.selected_category,this.selected_type)
   // console.log(this.term)
     this.registerForm = this.formBuilder.group({
@@ -61,7 +53,13 @@ selected_term
   }
   
   get form() { return this.registerForm.controls }
-  
+  otherSubmit(status){
+this.IndividualSubmit = status
+  }
+  formSubmitted(status){
+this.formSubmit = status
+  }
+
   onSubmit(){
 
     console.log(this.selected_category,this.selected_type,this.selected_term)

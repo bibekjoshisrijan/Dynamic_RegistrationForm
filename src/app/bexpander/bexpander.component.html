@@ -1,0 +1,66 @@
+<mat-form-field>
+        <input matInput placeholder="Name" [value]="userdata['name']['first_name'] + ' ' 
+        + userdata['name']['last_name']" readonly>
+      </mat-form-field>
+      <mat-form-field>
+          <input matInput placeholder="Address" [value]="userdata['address']" readonly>
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput placeholder="State" [value]="userdata['state']" readonly >
+        </mat-form-field>
+        <mat-form-field>
+            <input matInput placeholder="City" [value]="userdata['city']" readonly>
+          </mat-form-field>
+          <mat-form-field>
+            <input matInput placeholder="Aadhar Number" [value]="userdata['aadhar_number']" readonly>
+          </mat-form-field>
+          <mat-form-field>
+            <input matInput placeholder="Colony" [value]="userdata['colony']" readonly>
+          </mat-form-field>
+          <mat-form-field>
+            <input matInput placeholder="Demand Draft" [value]="userdata['demand_draft']" readonly>
+          </mat-form-field>
+          <mat-form-field>
+            <input matInput placeholder="Quantity" [value]="userdata['quantity']" readonly>
+          </mat-form-field>
+          <mat-form-field>
+                <input matInput placeholder="Term" [value]="userdata['term']" readonly>
+              </mat-form-field>
+  
+<div class="row" *ngIf="userdata['migrate'] ==='1' ">
+  <table>
+      <thead>
+          
+          <tr>
+              <th>State</th>
+              <th>Crop</th>
+          </tr>
+      </thead>
+
+      <tbody>
+          <tr *ngFor="let data of userdata['state_crop'];let i=index">
+              <td>
+                  <div class="input-field col s4">
+                      <input type="text" id="state" 
+                      class="validate" name="state" 
+                      readonly
+                       [value]="data['state']">
+                  </div>
+              </td>
+              <td>
+                  <div class="input-field col s4">
+                      <input type="text" id="crop" 
+                        readonly
+                      class="validate" name="crop"
+      [value]="data['crop']">
+                  </div>
+              </td>
+          </tr>
+
+      </tbody>
+     
+  </table>
+
+</div>
+
+  

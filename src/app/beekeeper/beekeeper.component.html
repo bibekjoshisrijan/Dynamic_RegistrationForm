@@ -1,25 +1,28 @@
 <form [formGroup]="beekeeper" (ngSubmit)="onSubmit()" enctype="multipart/form-data" >
 <div class="row">
-    <div class="input-field col s6">
-        <input id="first_name" name="first_name"
-        formControlName="first_name" type="text" class="validate" >
-        <label for="first_name">First Name</label>
-
-        <div class="red-text test-darken-2"
-        *ngIf="first_name.errors && (first_name.dirty || first_name.touched)">
-     <p *ngIf="first_name.errors.required">First Name is required</p>
-    </div>
-    </div>
-   
-    <div class="input-field col s6">
-        <input id="last_name" name="last_name" 
-        formControlName="last_name" type="text" class="validate">
-        <label for="last_name">Last Name</label>
-        <div class="red-text test-darken-2"
-        *ngIf="last_name.errors && (last_name.dirty || last_name.touched)">
-     <p *ngIf="last_name.errors.required">Last Name is required</p>
-    </div>
-    </div>
+    <div formGroupName="name">
+            <div class="input-field col s6">
+                    <input id="first_name" name="first_name"
+                    formControlName="first_name" type="text" class="validate" >
+                    <label for="first_name">First Name</label>
+            
+                    <div class="red-text test-darken-2"
+                    *ngIf="first_name.errors && (first_name.dirty || first_name.touched)">
+                 <p *ngIf="first_name.errors.required">First Name is required</p>
+                </div>
+                </div>
+               
+                <div class="input-field col s6">
+                    <input id="last_name" name="last_name" 
+                    formControlName="last_name" type="text" class="validate">
+                    <label for="last_name">Last Name</label>
+                    <div class="red-text test-darken-2"
+                    *ngIf="last_name.errors && (last_name.dirty || last_name.touched)">
+                 <p *ngIf="last_name.errors.required">Last Name is required</p>
+                </div>
+                </div>
+            </div>
+    
 </div>
 
 <div class="row">
@@ -88,14 +91,19 @@
             <tr *ngFor="let field of fields;let i=index">
                 <td>
                     <div class="input-field col s4">
-                        <input type="text" id="state" class="validate" name="state" 
+                        <input type="text" id="state" 
+                        placeholder="Enter City"
+                        class="validate" name="state" 
                         [ngModelOptions]="{standalone: true}"
                          [(ngModel)]="field['state']">
                     </div>
                 </td>
                 <td>
                     <div class="input-field col s4">
-                        <input type="text" id="crop" class="validate" name="crop"
+                        <input type="text" id="crop" 
+                        placeholder="Enter Crop"
+
+                        class="validate" name="crop"
                         [ngModelOptions]="{standalone: true}" [(ngModel)]="field['crop']">
                     </div>
                 </td>
@@ -175,7 +183,9 @@
                           </div>
                    
           </div>
+          
           <button class="btn waves-effect waves-light  btn-small"
+          [disabled]="beekeeper.invalid"
            type="submit" name="action" >Submit
             <i class="material-icons right">send</i>
           </button>

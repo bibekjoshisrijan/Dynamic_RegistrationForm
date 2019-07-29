@@ -1,40 +1,119 @@
-<mat-accordion>
-        <mat-expansion-panel>
-          <mat-expansion-panel-header>
-            <mat-panel-title>
-              Personal data
-            </mat-panel-title>
-            <mat-panel-title>
-                    Personal data
-                  </mat-panel-title>
+<div class="container">
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Date</th>
+        <th>Category</th>
+
+      </tr>
+    </thead>
+  </table>
+  <table>
+    <thead>
+
+      <tr>
+        <th></th>
+        <th></th>
+        <th></th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr>
+        <mat-accordion>
+          <mat-expansion-panel *ngFor="let data of userdata ; let i=index" [attr.id]="'Location' + i">
+            <mat-expansion-panel-header *ngIf="data['category'] !=='0';else other">
+
+
+              <mat-panel-title>
+                {{data['name'] | titlecase}}
+              </mat-panel-title>
+              <mat-panel-title>
+                {{data['date']|date}}
+              </mat-panel-title>
+              <mat-panel-title>
+                {{categories[data['category']]}}
+              </mat-panel-title>
+
+              <mat-panel-description>
+                    Type your name and age
+                  </mat-panel-description>
+
+              <!-- <mat-panel-title>
+
+                <button class="btn  blue waves-effect waves-light  btn-small" type="submit" name="action">Accept
+                <i class="material-icons right">send</i> -->
+                <!-- </button> -->
+              <!-- </mat-panel-title> --> 
+              <mat-panel-title (click)="removePanel(i)">
+              Reject
+
+              </mat-panel-title>
+
+            </mat-expansion-panel-header>
+
+            <ng-template #other>
+              <mat-expansion-panel-header>
+                <mat-panel-title>
+                  {{data['name']['first_name'] + ' '+ data['name']['last_name'] | titlecase}}
+                </mat-panel-title>
+                <mat-panel-title>
+                  {{data['date']|date}}
+                </mat-panel-title>
+                <mat-panel-title>
+                  {{categories[data['category']]}}
+                </mat-panel-title>
+
+                <mat-panel-title  (click)="Accepted(i)">
+                    <p style="margin: 0" class="btn blue">Accept</p>
+                </mat-panel-title>
+
+                <mat-panel-title  (click)="removePanel(i)">
+                    <p style="margin: 0" class="btn red">Reject</p>
+                </mat-panel-title>
+      
+
+                <!-- <mat-panel-description>
+                    Type your name and age
+                  </mat-panel-description> -->
+              </mat-expansion-panel-header>
+            </ng-template>
+
+
+            <app-otherexpander [userdata]="data" *ngIf="data['category'] !=='0' ;else bexpander"></app-otherexpander>
+            <ng-template #bexpander>
+              <app-bexpander [userdata]="data"></app-bexpander>
+            </ng-template>
+
+
+            <div class="row">
+              <div class="col s6">
+                <button class="btn  blue waves-effect waves-light  btn-small" type="submit" name="action">Accept
+                  <!-- <i class="material-icons right">send</i> -->
+                </button>
+
+                <button class="btn  red waves-effect waves-light  btn-small" style="margin-left: 2%;"
+                  (click)="removePanel(i)" type="submit" name="action">Reject
+                  <!-- <i class="material-icons right">send</i> -->
+                </button>
+              </div>
+            </div>
+
+          </mat-expansion-panel>
+          <!-- <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+                <mat-expansion-panel-header>
                   <mat-panel-title>
-                        Personal data
-                      </mat-panel-title><mat-panel-title>
-                            Personal data
-                          </mat-panel-title>
-            <mat-panel-description>
-              Type your name and age
-            </mat-panel-description>
-          </mat-expansion-panel-header>
-      
-          <mat-form-field>
-            <input matInput placeholder="First name">
-          </mat-form-field>
-      
-          <mat-form-field>
-            <input matInput placeholder="Age">
-          </mat-form-field>
-        </mat-expansion-panel>
-        <mat-expansion-panel (opened)="panelOpenState = true"
-                             (closed)="panelOpenState = false">
-          <mat-expansion-panel-header>
-            <mat-panel-title>
-              Self aware panel
-            </mat-panel-title>
-            <mat-panel-description>
-              Currently I am {{panelOpenState ? 'open' : 'closed'}}
-            </mat-panel-description>
-          </mat-expansion-panel-header>
-          <p>I'm visible because I am open</p>
-        </mat-expansion-panel>
-      </mat-accordion>
+                    Self aware panel
+                  </mat-panel-title>
+                  <mat-panel-description>
+                    Currently I am {{panelOpenState ? 'open' : 'closed'}}
+                  </mat-panel-description>
+                </mat-expansion-panel-header>
+                <p>I'm visible because I am open</p>
+              </mat-expansion-panel> -->
+        </mat-accordion>
+      </tr>
+    </tbody>
+  </table>
+</div>
